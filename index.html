@@ -1,0 +1,132 @@
+<html>
+<head>
+<title>complaint form</title>
+<script>
+function validateform(){
+var name=document.myform.name.value;
+var aadhar=document.myform.aadhar.value;
+var address=document.myform.address.value;
+var phno=document.myform.phno.value;
+var x=document.myform.email.value;
+var atpos=x.indexOf("@");
+var dotpos=x.lastIndexOf(".");
+var complaint=document.myform.complaint.value; 
+if (name==null || name=="")
+{
+    alert("Enter your name");
+    return false;
+}
+if(aadhar==null || aadhar=="" || aadhar.length!=12 || isNan(aadhar))
+{
+    alert("Please enter a valid aadhar number"); 
+    return false;
+}
+if(address==null || address=="")
+{ 
+    alert("Enter your address");
+    return false;
+}
+if(phno==null || phno=="" || phno.length!=10 || isNaN(phno))
+{
+    alert("Enter a valid phone number");
+    return false;
+}
+if(x==null || x=="" || atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+{
+    alert("Enter valid email id");
+    return false;
+}
+if(complaint==null || complaint=="")
+{
+     alert("Enter complaint");
+    return false;
+}
+return true;
+}
+   
+</script>
+</head>
+<body bgcolor="skyblue">
+<p align=center>
+<table cellspacing=20 >
+<form name="myform" method="post" action="complaint.php" onsubmit="return validateform()">
+<th colspan="7" >COMPLAINT FORM </th>
+<tr>
+<td>NAME</td>
+<td><input type="text" name="name" size=30></td> </tr>
+<tr>
+<td>AADHAR NUMBER<TD><input type="text" name=aadhar size=30>
+</tr>
+<TR >
+<TD > ADDRESS<td>
+<TEXTAREA ROWs="7" COLS="55" name="address"/> </TEXTAREA>
+</TD>
+</TR>
+<tr>
+<td>CONTACT N.O</td>
+   
+<td><input type="text" name=phno size=30></td> </td>
+</tr>
+<TR >
+<TD>E-MAIL ID</TD>
+<td><input type="text" name=email size=30></td>
+</TR>
+<tr>
+<td>REGISTER COMPLAINTS:</td>
+<td>
+<TEXTAREA ROWs="7" COLS="55" name="complaint"/>
+</TEXTAREA>
+</td>
+</tr>
+<TR>
+<TD><INPUT TYPE="SUBMIT" NAME="COMPLETE" VALUE="SUBMIT"/> <td><input type="reset" name="reset"
+value="RESET"/> </TR>
+</p>
+</form>
+<html>
+<body>
+         <title>COMPLAINT INVOICE</title> <?php
+$host="Complaint invoice"; $username="root";
+$password="";
+$db_name="panchayat";
+$table="epanchayat";
+$con=mysqli_connect("$host", "$username", "$password", $db_name);
+if(!$con)
+{
+die("cannot connect");
+}
+$name=$_POST['name'];
+$aadhar=$_POST['aadhar'];
+$address=$_POST['address'];
+$phno=$_POST['phno'];
+$email=$_POST['email'];
+$complaints=$_POST['complaint'];
+$sql="INSERT INTO $table(name, aadhar, address, phno, email, complaints) VALUES('$name',
+'$aadhar', '$address', '$phno', '$email', '$complaints')"; $result=mysqli_query($con,$sql);
+mysqli_close($con);
+   
+         ?>
+<script>
+function conf(){
+var ask=window.confirm("Are you want to register this complaint?");
+if(ask){
+window.alert("YOUR COMPLAINT IS SUCCESSFULLY COLLECTED");
+window.location.href="panchayat.html";
+}
+}
+</script>
+<h2 align=center> COMPLAINT DETAILS</h2><br>
+<h2>
+<p align=center>
+<table cellspacing=20>
+<form>
+<tr><td>Name: <td><?php echo $_POST["name"]; ?></tr>
+<tr><td>Aadhar number:<td><?php echo $_POST["aadhar"]; ?></tr>
+<tr><td>Address: <td><?php echo $_POST["address"]; ?></tr>
+<tr><td>Contact number:<td><?php echo $_POST["phno"]; ?></tr>
+<tr><td>E-mail id: <td><?php echo $_POST["email"]; ?></tr> <tr><td>Complaints Registered: <td>
+<?php echo $_POST["complaint"]; ?></tr>
+   
+</table> <br><br>
+<input type="button" onclick="conf()" value="PLACE YOUR COMPLAINT"/>
+</form> </p></h2> </body>
