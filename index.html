@@ -11,38 +11,30 @@ var x=document.myform.email.value;
 var atpos=x.indexOf("@");
 var dotpos=x.lastIndexOf(".");
 var complaint=document.myform.complaint.value; 
-if (name==null || name=="")
-{
-    alert("Enter your name");
-    return false;
-}
-if(aadhar==null || aadhar=="" || aadhar.length!=12 || isNan(aadhar))
-{
-    alert("Please enter a valid aadhar number"); 
-    return false;
-}
-if(address==null || address=="")
-{ 
-    alert("Enter your address");
-    return false;
-}
-if(phno==null || phno=="" || phno.length!=10 || isNaN(phno))
-{
-    alert("Enter a valid phone number");
-    return false;
-}
-if(x==null || x=="" || atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
-{
-    alert("Enter valid email id");
-    return false;
+if (name==null || name==""){
+alert("Enter your name");
+return false;
 }
 if(complaint==null || complaint=="")
 {
-    alert("Enter complaint");
+alert("Enter complaint");
+    return false;    }
+if(address==null || address==""){ alert("Enter your address"); return false;
+    }
+    if(phno==null || phno=="" || phno.length!=10 || isNaN(phno)){
+    alert("Enter a valid phone number");
     return false;
-}
-return true;
-}
+    }
+    if(x==null || x=="" || atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+    {
+    alert("Enter valid email id");
+    return false;
+    }
+    if(aadhar==null || aadhar=="" || aadhar.length!=12 || isNan(aadhar)){
+    alert("Please enter a valid aadhar number"); return false;
+    }
+    return true;
+    }
    
 </script>
 </head>
@@ -111,7 +103,7 @@ function conf(){
 var ask=window.confirm("Are you want to register this complaint?");
 if(ask){
 window.alert("YOUR COMPLAINT IS SUCCESSFULLY COLLECTED");
-window.location.href="panchayat.html";
+window.location.href="index.html";
 }
 }
 </script>
